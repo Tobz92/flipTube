@@ -1,0 +1,12 @@
+a.mirrorTube-button {
+  text-align: center;
+}
+
+a.mirrorTube-button svg {
+  margin-bottom: 2px;
+  height: 18px;
+  width: 18px;
+  vertical-align: middle;
+  fill: white;
+  transition-duration: .3s;
+}

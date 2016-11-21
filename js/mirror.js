@@ -1,10 +1,11 @@
 console.log('I got loaded');
 
 mirrorIt = function() {
- var videoTag = document.querySelector('video');
+    var videoTag = document.querySelector('video');
 
- updateToggleControls();
- videoTag.style.transform =  videoTag.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
+    updateToggleControls();
+    videoTag.style.transform =  videoTag.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
+ 
 };
 
 // Create the SVG Image
@@ -24,7 +25,7 @@ getSVG = function() {
 
 updateToggleControls = function() {
   svg = document.querySelector('.mirrorTube-button svg');
-  console.log(svg.title);
+
   if(svg.title === undefined || svg.title === ''){
     svg.style.fill = '#f12b24';
     svg.style.transform = 'scaleX(-1)';
@@ -38,6 +39,7 @@ updateToggleControls = function() {
 
 addToggleControls = function() {
   controls = document.querySelector('div.ytp-left-controls');
+
   if (!controls) return false;
   newButton = document.createElement('a');
   newButton.className = 'ytp-button mirrorTube-button';
@@ -49,12 +51,17 @@ addToggleControls = function() {
 
 //Start the whole stuff
 init = function() {
-  addToggleControls();
   newButton.addEventListener('click', mirrorIt);
-}
+};
 
-//AYYYY
-init();
+var checkIt = setInterval(() => {
+    if (addToggleControls()) {
+      init();
+      clearInterval(checkIt);
+    }
+  }, 500);
+
+
 
 
 

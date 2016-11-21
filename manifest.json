@@ -3,7 +3,7 @@
 
   "name": "mirrorTube",
   "description": "Lets the user mirror the Youtube Content.",
-  "version": "1.0",
+  "version": "0.1",
 
   "permissions": [
     "activeTab"

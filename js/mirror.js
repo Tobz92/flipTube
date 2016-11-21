@@ -1,5 +1,3 @@
-console.log('I got loaded');
-
 mirrorIt = function() {
     var videoTag = document.querySelector('video');
 
@@ -8,7 +6,10 @@ mirrorIt = function() {
  
 };
 
-// Create the SVG Image
+/*
+* Create the svg icon 
+* return: give me the created svg
+*/
 getSVG = function() {
   svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
@@ -23,6 +24,9 @@ getSVG = function() {
   return svg;
 };
 
+/*
+* Checks the current state of the icon and toggles it
+*/
 updateToggleControls = function() {
   svg = document.querySelector('.mirrorTube-button svg');
 
@@ -37,26 +41,25 @@ updateToggleControls = function() {
   }
 };
 
-addToggleControls = function() {
-  controls = document.querySelector('div.ytp-left-controls');
 
-  if (!controls) return false;
+/*
+* Create and attach the svg button on the Playerbar
+*/
+addToggleControls = function() {
+  lftControls = document.querySelector('div.ytp-left-controls');
+
+  if (!lftControls) return false;
   newButton = document.createElement('a');
   newButton.className = 'ytp-button mirrorTube-button';
   newButton.title = 'Mirror the video';
   newButton.appendChild(getSVG());
-  controls.appendChild(newButton);
+  lftControls.appendChild(newButton);
   return true;
-};
-
-//Start the whole stuff
-init = function() {
-  newButton.addEventListener('click', mirrorIt);
 };
 
 var checkIt = setInterval(() => {
     if (addToggleControls()) {
-      init();
+      newButton.addEventListener('click', mirrorIt);
       clearInterval(checkIt);
     }
   }, 500);

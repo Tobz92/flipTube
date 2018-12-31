@@ -57,14 +57,28 @@ addToggleControls = function() {
   return true;
 };
 
+
+var targetNode = document.querySelector('video');
+var config = { attributes: true, childList: false, subtree: false };
+
+var callback = function(mutationsList, observer) {
+    for(var mutation of mutationsList) {
+        if (mutation.attributeName == 'src') {
+			svg = document.querySelector('.mirrorTube-button svg');
+			svg.style.fill = '#fff';
+    		svg.style.transform = '';
+    		svg.title = '';
+        }
+    }
+};
+
+var observer = new MutationObserver(callback);
+
+observer.observe(targetNode, config);
+
 var checkIt = setInterval(() => {
     if (addToggleControls()) {
       newButton.addEventListener('click', mirrorIt);
       clearInterval(checkIt);
     }
   }, 500);
-
-
-
-
-

@@ -1,24 +1,25 @@
 {
-  "name": "mirrorTube",
+  "name": "FlipTube",
   "version": "1.0.0",
-  "description": "mirrorTube is a Chrome extension which allows you to **_mirror_** the video element on the y axis.",
+  "description": "FlipTube is a Chrome extension which allows you to **_mirror_** the video element on the y axis.",
   "main": "js/mirror.js",
   "scripts": {
-    "lint":"eslint js/mirror.js",
+    "lint": "eslint js/mirror.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/byzbro/mirrorTube.git"
+    "url": "git+https://github.com/shmtz/FlipTube.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/byzbro/mirrorTube/issues"
+    "url": "https://github.com/shmtz/FlipTube/issues"
   },
-  "homepage": "https://github.com/byzbro/mirrorTube#readme",
+  "homepage": "https://github.com/shmtz/FlipTube#readme",
   "devDependencies": {
     "eslint": "^6.7.2"
-  }
+  },
+  "dependencies": {}
 }

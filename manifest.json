@@ -11,6 +11,7 @@
   "icons": {
     "16": "img/reflektieren16.png",
     "32": "img/reflektieren32.png",
+    "48": "img/reflektieren48.png",
     "128": "img/reflektieren128.png"
   },
   "content_scripts": [

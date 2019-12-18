@@ -1,4 +1,4 @@
-![alt-text](img/reflektieren.png "flipTube Logo")
+![alt-text](img/reflektieren128.png "flipTube Logo")
 
 # flipTube
 

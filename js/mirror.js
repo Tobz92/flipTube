@@ -43,8 +43,8 @@ let addToggleControls = () => {
         return false;
     }
     newButton = document.createElement("a");
-    newButton.className = "ytp-button mirrorTube-button";
-    newButton.title = "Mirror the video";
+    newButton.className = "ytp-button flipTube-button";
+    newButton.title = "Flip the video";
     newButton.appendChild(getSVG());
     lftControls.appendChild(newButton);
     return true;
@@ -61,7 +61,7 @@ let vSourceObserver = () => {
             (mutation) => {
                 if(mutation.attributeName === "src")
                 {
-                    let svg = document.querySelector(".mirrorTube-button svg");
+                    let svg = document.querySelector(".flipTube-button svg");
                     svg.style.fill = "#fff";
                     svg.style.transform = "";
                     svg.title = "";
@@ -78,7 +78,7 @@ let vSourceObserver = () => {
 * Checks the current state of the icon and toggles it
 */
 let updateToggleControls = () => {
-    let svg = document.querySelector(".mirrorTube-button svg");
+    let svg = document.querySelector(".flipTube-button svg");
 
     if(svg.title === undefined || svg.title === ""){
         svg.style.fill = "#f12b24";

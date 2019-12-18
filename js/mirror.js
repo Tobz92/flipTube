@@ -1,11 +1,13 @@
-console.log("Oh Snap, lets mirrors!");
+
+
+let newButton;
 
 /**
  * Check if Tag is available and after that start setup the thing
  */
 let run = () =>
 {
-    //setTimeout(videoTagAvailable() ? addFunctions : run, 500);
+    setTimeout(videoTagAvailable() ? injectAndObserv : run, 500);
 };
 
 /**
@@ -14,34 +16,38 @@ let run = () =>
  */
 let videoTagAvailable = () =>
 {
-    //return document.querySelector('video') !== null;
+    return document.querySelector("video") !== null;
+};
+
+var injectAndObserv = () => {
+  addToggleControls();
+  vSourceObserver();
+  newButton.addEventListener("click", mirrorIt);
 };
 
 
 let mirrorIt = () => {
-    var videoTag = document.querySelector('video');
+    let videoTag = document.querySelector("video");
 
     updateToggleControls();
-    videoTag.style.transform =  videoTag.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
+    videoTag.style.transform =  videoTag.style.transform === "scaleX(-1)" ? "" : "scaleX(-1)";
 
-};
-
-var addFunctions = () => {
-  addToggleControls();
-  addObserver();
 };
 
 /**
  * Attach svg to the player
  * @returns {boolean}
  */
-addToggleControls = function() {
-    lftControls = document.querySelector('div.ytp-left-controls');
+let addToggleControls = () => {
+    let lftControls = document.querySelector("div.ytp-left-controls");
 
-    if (!lftControls) return false;
-    newButton = document.createElement('a');
-    newButton.className = 'ytp-button mirrorTube-button';
-    newButton.title = 'Mirror the video';
+    if (!lftControls)
+    {
+        return false;
+    }
+    newButton = document.createElement("a");
+    newButton.className = "ytp-button mirrorTube-button";
+    newButton.title = "Mirror the video";
     newButton.appendChild(getSVG());
     lftControls.appendChild(newButton);
     return true;
@@ -49,43 +55,43 @@ addToggleControls = function() {
 
 
 /**
- * Observe the video Tag
+ * Observe the video Tag and reset on video switch
  */
-var addObserver = () => {
+var vSourceObserver = () => {
 
-    var vTag = document.querySelector('video');
-    var observer = new MutationObserver(function(mutations) {
+    var vTag = document.querySelector("video");
+    var observer = new MutationObserver((mutations) => {
         mutations.forEach(
-            function (mutation) {
-                if(mutation.attributeName === 'style')
+            (mutation) => {
+                if(mutation.attributeName === "src")
                 {
-                    svg = document.querySelector('.mirrorTube-button svg');
-                    svg.style.fill = '#fff';
-                    svg.style.transform = '';
-                    svg.title = '';
+                    let svg = document.querySelector(".mirrorTube-button svg");
+                    svg.style.fill = "#fff";
+                    svg.style.transform = "";
+                    svg.title = "";
                 }
             }
-        )
+        );
     });
-    var config = { attributes: true, childList: false, subtree: false };
+    let config = { attributes: true, childList: false, subtree: false };
 
     observer.observe(vTag, config);
-}
+};
 
 /**
 * Checks the current state of the icon and toggles it
 */
-updateToggleControls = function() {
-    svg = document.querySelector('.mirrorTube-button svg');
+let updateToggleControls = () => {
+    let svg = document.querySelector(".mirrorTube-button svg");
 
-    if(svg.title === undefined || svg.title === ''){
-        svg.style.fill = '#f12b24';
-        svg.style.transform = 'scaleX(-1)';
-        svg.title = 'Mirrored!';
+    if(svg.title === undefined || svg.title === ""){
+        svg.style.fill = "#f12b24";
+        svg.style.transform = "scaleX(-1)";
+        svg.title = "Mirrored!";
     }else{
-        svg.style.fill = '#fff';
-        svg.style.transform = '';
-        svg.title = '';
+        svg.style.fill = "#fff";
+        svg.style.transform = "";
+        svg.title = "";
     }
 };
 
@@ -94,38 +100,18 @@ updateToggleControls = function() {
 * Create the svg icon
 * return: give me the created svg
 */
-getSVG = function() {
-  svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('viewBox', '0 0 24 24');
-  svg.setAttribute('fill', '#fff');
-  pathOne = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  pathTwo = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  pathOne.setAttribute('d', 'M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z');
-  pathTwo.setAttribute('d', 'M0 0h24v24H0z');
-  pathTwo.setAttribute('fill', 'none');
+let getSVG = () => {
+  let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("fill", "#fff");
+  let pathOne = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  let pathTwo = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  pathOne.setAttribute("d", "M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z");
+  pathTwo.setAttribute("d", "M0 0h24v24H0z");
+  pathTwo.setAttribute("fill", "none");
 
   svg.appendChild(pathOne,pathTwo);
   return svg;
 };
 
-/*var callback = function(mutationsList, observer) {
-    for(var mutation of mutationsList) {
-        if (mutation.attributeName == 'src') {
-			svg = document.querySelector('.mirrorTube-button svg');
-			svg.style.fill = '#fff';
-    		svg.style.transform = '';
-    		svg.title = '';
-        }
-    }
-};*/
-
-addObserver();
-var checkIt = setInterval(() => {
-    if (addToggleControls()) {
-      newButton.addEventListener('click', mirrorIt);
-      clearInterval(checkIt);
-    }
-  }, 500);
-
-
-//run();
+run();

@@ -1,11 +1,11 @@
-console.log("Oh Snap, lets mirror!");
+console.log("Oh Snap, lets mirrors!");
 
 /**
  * Check if Tag is available and after that start setup the thing
  */
 let run = () =>
 {
-    setTimeout(videoTagAvailable() ? addFunctions : run, 500);
+    //setTimeout(videoTagAvailable() ? addFunctions : run, 500);
 };
 
 /**
@@ -14,11 +14,11 @@ let run = () =>
  */
 let videoTagAvailable = () =>
 {
-    return document.querySelector('video') !== null;
+    //return document.querySelector('video') !== null;
 };
 
 
-let mirrorIt = function() {
+let mirrorIt = () => {
     var videoTag = document.querySelector('video');
 
     updateToggleControls();
@@ -47,16 +47,32 @@ addToggleControls = function() {
     return true;
 };
 
+
+/**
+ * Observe the video Tag
+ */
 var addObserver = () => {
 
-    var observer = new MutationObserver(callback);
     var vTag = document.querySelector('video');
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(
+            function (mutation) {
+                if(mutation.attributeName === 'style')
+                {
+                    svg = document.querySelector('.mirrorTube-button svg');
+                    svg.style.fill = '#fff';
+                    svg.style.transform = '';
+                    svg.title = '';
+                }
+            }
+        )
+    });
     var config = { attributes: true, childList: false, subtree: false };
 
     observer.observe(vTag, config);
 }
 
-/*
+/**
 * Checks the current state of the icon and toggles it
 */
 updateToggleControls = function() {
@@ -74,7 +90,7 @@ updateToggleControls = function() {
 };
 
 
-/*
+/**
 * Create the svg icon
 * return: give me the created svg
 */
@@ -92,7 +108,7 @@ getSVG = function() {
   return svg;
 };
 
-var callback = function(mutationsList, observer) {
+/*var callback = function(mutationsList, observer) {
     for(var mutation of mutationsList) {
         if (mutation.attributeName == 'src') {
 			svg = document.querySelector('.mirrorTube-button svg');
@@ -101,9 +117,9 @@ var callback = function(mutationsList, observer) {
     		svg.title = '';
         }
     }
-};
+};*/
 
-
+addObserver();
 var checkIt = setInterval(() => {
     if (addToggleControls()) {
       newButton.addEventListener('click', mirrorIt);

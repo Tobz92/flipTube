@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
     "name": "FlipTube",
-  "description": "Let the user mirror the Youtube Content.",
+  "description": "Let the user flip the YouTube Content.",
   "version": "0.1",
 
   "permissions": [

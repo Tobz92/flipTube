@@ -1,13 +1,81 @@
-mirrorIt = function() {
+console.log("Oh Snap, lets mirror!");
+
+/**
+ * Check if Tag is available and after that start setup the thing
+ */
+let run = () =>
+{
+    setTimeout(videoTagAvailable() ? addFunctions : run, 500);
+};
+
+/**
+ * Check if tag available
+ * @returns {boolean}
+ */
+let videoTagAvailable = () =>
+{
+    return document.querySelector('video') !== null;
+};
+
+
+let mirrorIt = function() {
     var videoTag = document.querySelector('video');
 
     updateToggleControls();
     videoTag.style.transform =  videoTag.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
- 
+
 };
 
+var addFunctions = () => {
+  addToggleControls();
+  addObserver();
+};
+
+/**
+ * Attach svg to the player
+ * @returns {boolean}
+ */
+addToggleControls = function() {
+    lftControls = document.querySelector('div.ytp-left-controls');
+
+    if (!lftControls) return false;
+    newButton = document.createElement('a');
+    newButton.className = 'ytp-button mirrorTube-button';
+    newButton.title = 'Mirror the video';
+    newButton.appendChild(getSVG());
+    lftControls.appendChild(newButton);
+    return true;
+};
+
+var addObserver = () => {
+
+    var observer = new MutationObserver(callback);
+    var vTag = document.querySelector('video');
+    var config = { attributes: true, childList: false, subtree: false };
+
+    observer.observe(vTag, config);
+}
+
 /*
-* Create the svg icon 
+* Checks the current state of the icon and toggles it
+*/
+updateToggleControls = function() {
+    svg = document.querySelector('.mirrorTube-button svg');
+
+    if(svg.title === undefined || svg.title === ''){
+        svg.style.fill = '#f12b24';
+        svg.style.transform = 'scaleX(-1)';
+        svg.title = 'Mirrored!';
+    }else{
+        svg.style.fill = '#fff';
+        svg.style.transform = '';
+        svg.title = '';
+    }
+};
+
+
+/*
+* Create the svg icon
 * return: give me the created svg
 */
 getSVG = function() {
@@ -24,43 +92,6 @@ getSVG = function() {
   return svg;
 };
 
-/*
-* Checks the current state of the icon and toggles it
-*/
-updateToggleControls = function() {
-  svg = document.querySelector('.mirrorTube-button svg');
-
-  if(svg.title === undefined || svg.title === ''){
-    svg.style.fill = '#f12b24';
-    svg.style.transform = 'scaleX(-1)';
-    svg.title = 'Mirrored!';
-  }else{
-    svg.style.fill = '#fff';
-    svg.style.transform = '';
-    svg.title = '';
-  }
-};
-
-
-/*
-* Create and attach the svg button on the Playerbar
-*/
-addToggleControls = function() {
-  lftControls = document.querySelector('div.ytp-left-controls');
-
-  if (!lftControls) return false;
-  newButton = document.createElement('a');
-  newButton.className = 'ytp-button mirrorTube-button';
-  newButton.title = 'Mirror the video';
-  newButton.appendChild(getSVG());
-  lftControls.appendChild(newButton);
-  return true;
-};
-
-
-var targetNode = document.querySelector('video');
-var config = { attributes: true, childList: false, subtree: false };
-
 var callback = function(mutationsList, observer) {
     for(var mutation of mutationsList) {
         if (mutation.attributeName == 'src') {
@@ -72,9 +103,6 @@ var callback = function(mutationsList, observer) {
     }
 };
 
-var observer = new MutationObserver(callback);
-
-observer.observe(targetNode, config);
 
 var checkIt = setInterval(() => {
     if (addToggleControls()) {
@@ -82,3 +110,6 @@ var checkIt = setInterval(() => {
       clearInterval(checkIt);
     }
   }, 500);
+
+
+//run();

@@ -5,8 +5,7 @@ let newButton;
 /**
  * Check if Tag is available and after that start setup the thing
  */
-let run = () =>
-{
+let run = () => {
     setTimeout(videoTagAvailable() ? injectAndObserv : run, 500);
 };
 
@@ -14,15 +13,13 @@ let run = () =>
  * Check if tag available
  * @returns {boolean}
  */
-let videoTagAvailable = () =>
-{
-    return document.querySelector("video") !== null;
-};
+let videoTagAvailable = () => document.querySelector("video") !== null;
+
 
 var injectAndObserv = () => {
-  addToggleControls();
-  vSourceObserver();
-  newButton.addEventListener("click", mirrorIt);
+    addToggleControls();
+    vSourceObserver();
+    newButton.addEventListener("click", mirrorIt);
 };
 
 
@@ -58,7 +55,6 @@ let addToggleControls = () => {
  * Observe the video Tag and reset on video switch
  */
 var vSourceObserver = () => {
-
     var vTag = document.querySelector("video");
     var observer = new MutationObserver((mutations) => {
         mutations.forEach(
@@ -101,17 +97,17 @@ let updateToggleControls = () => {
 * return: give me the created svg
 */
 let getSVG = () => {
-  let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "#fff");
-  let pathOne = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  let pathTwo = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  pathOne.setAttribute("d", "M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z");
-  pathTwo.setAttribute("d", "M0 0h24v24H0z");
-  pathTwo.setAttribute("fill", "none");
+    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "#fff");
+    let pathOne = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    let pathTwo = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pathOne.setAttribute("d", "M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z");
+    pathTwo.setAttribute("d", "M0 0h24v24H0z");
+    pathTwo.setAttribute("fill", "none");
 
-  svg.appendChild(pathOne,pathTwo);
-  return svg;
+    svg.appendChild(pathOne,pathTwo);
+    return svg;
 };
 
 run();

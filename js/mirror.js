@@ -16,7 +16,7 @@ let run = () => {
 let videoTagAvailable = () => document.querySelector("video") !== null;
 
 
-var injectAndObserv = () => {
+let injectAndObserv = () => {
     addToggleControls();
     vSourceObserver();
     newButton.addEventListener("click", mirrorIt);
@@ -54,7 +54,7 @@ let addToggleControls = () => {
 /**
  * Observe the video Tag and reset on video switch
  */
-var vSourceObserver = () => {
+let vSourceObserver = () => {
     var vTag = document.querySelector("video");
     var observer = new MutationObserver((mutations) => {
         mutations.forEach(

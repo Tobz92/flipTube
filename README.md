@@ -2,7 +2,7 @@
 
 # FlipTube
 
-FlipTube is a Chrome extension which allows you to **_flip_** the video. <br> <br>
+FlipTube is a Chrome extension which allows you to **_flip_** the video horizontally. <br> <br>
 [Link to the Extension in the webstore.](https://chrome.google.com/webstore/detail/fliptube/gollpjjapppocplphgocmjggifocofjk)
 
 If you enjoy the project, i would be happy about a coffee.

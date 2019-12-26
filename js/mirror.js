@@ -56,6 +56,8 @@ let addToggleControls = () => {
  */
 let vSourceObserver = () => {
     let vTag = document.querySelector("video");
+    let svg = document.querySelector(".FlipTube-button svg");
+
     let observer = new MutationObserver((mutations) => {
         mutations.forEach(
             (mutation) => {
@@ -67,9 +69,7 @@ let vSourceObserver = () => {
 
                 if (mutation.attributeName === "style")
                 {
-                    let svg = document.querySelector(".FlipTube-button svg");
-                    let videoTag = document.querySelector("video");
-                    svg.style.transform === "scaleX(-1)" ? videoTag.style.transform = "scaleX(-1)" : "";
+                    svg.style.transform === "scaleX(-1)" ? vTag.style.transform = "scaleX(-1)" : "";
                 }
             }
         );

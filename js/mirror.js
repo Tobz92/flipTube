@@ -55,16 +55,21 @@ let addToggleControls = () => {
  * Observe the video Tag and reset on video switch
  */
 let vSourceObserver = () => {
-    var vTag = document.querySelector("video");
-    var observer = new MutationObserver((mutations) => {
+    let vTag = document.querySelector("video");
+    let observer = new MutationObserver((mutations) => {
         mutations.forEach(
             (mutation) => {
                 if(mutation.attributeName === "src")
                 {
                     let svg = document.querySelector(".FlipTube-button svg");
-                    svg.style.fill = "#fff";
-                    svg.style.transform = "";
-                    svg.title = "";
+                    resetFlipBtn(svg);
+                }
+
+                if (mutation.attributeName === "style")
+                {
+                    let svg = document.querySelector(".FlipTube-button svg");
+                    let videoTag = document.querySelector("video");
+                    svg.style.transform === "scaleX(-1)" ? videoTag.style.transform = "scaleX(-1)" : "";
                 }
             }
         );
@@ -89,6 +94,13 @@ let updateToggleControls = () => {
         svg.style.transform = "";
         svg.title = "";
     }
+};
+
+
+let resetFlipBtn = (btn) => {
+    btn.style.fill = "#fff";
+    btn.style.transform = "";
+    btn.title = "";
 };
 
 

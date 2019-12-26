@@ -3,7 +3,7 @@
 
     "name": "FlipTube",
   "description": "Let the user flip the YouTube Content.",
-  "version": "0.1",
+  "version": "1.0.1",
 
   "permissions": [
     "activeTab"

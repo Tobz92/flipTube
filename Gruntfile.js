@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             }
         },
         zip: {
-            dogshit: {
+            dist: {
                 cwd: 'dist/',
                 src: 'dist/**   ',
                 dest: '<%= grunt.template.today("yyyy-mm-dd") %>_ft.zip',
